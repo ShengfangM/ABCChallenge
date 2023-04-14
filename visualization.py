@@ -249,6 +249,8 @@ def plot3d_spectrum(image, label):
   ax.set_ylabel('pixels')
   ax.set_zlabel('spectrum')
 
+
+
 def plot_spectrum(image, label):
   """
   plot the spectrum for each pixels in the image
@@ -274,7 +276,116 @@ def plot_spectrum(image, label):
   # plt.xlim([0,11])
   plt.show()
 
+def plot_spectrums(images, label):
+  """
+  plot the spectrum for each pixels in the image
+  image is numpy array with shape (C, H,W)
+  """
+  # img_shp = images.shape
+  # n = img_shp[0]
+  n = len(images)
+  fig, axs = plt.subplots(1, n, figsize=(n*5, 4))
+  fig = plt.gcf()
+  # fig.set_size_inches(18.5,10.5)
+  fig.suptitle(str(label))
 
+  for l in range(n):
+    image = images[l]
+
+    c,h,w = image.shape
+    img = image.reshape(c,-1)
+
+    for i in range(w*h):
+      axs[l].plot(range(c),img[:c,i])
+    plt.title(f'The biomass is {label}')
+    axs[l].set_xlabel('channels')
+    axs[l].set_ylabel('intensity')
+    # plt.ylim([0,6000])
+    # plt.xlim([0,11])
+
+  plt.subplots_adjust(right=0.8)
+  plt.show()
+  
+
+
+def scatter_spectrums(images, label):
+  """
+  plot the spectrum for each pixels in the image
+  image is numpy array with shape (C, H,W)
+  """
+  # img_shp = images.shape
+  # n = img_shp[0]
+  n = len(images)
+  fig, axs = plt.subplots(1, n, figsize=(n*5, 4))
+  fig = plt.gcf()
+  # fig.set_size_inches(18.5,10.5)
+  fig.suptitle(str(label))
+
+  for l in range(n):
+    image = images[l]
+
+    c,h,w = image.shape
+    img = image.reshape(c,-1)
+
+    for i in range(w*h):
+      axs[l].plot(range(c),img[:c,i], '*')
+    plt.title(f'The biomass is {label}')
+    axs[l].set_xlabel('channels')
+    axs[l].set_ylabel('intensity')
+    # plt.ylim([0,6000])
+    # plt.xlim([0,11])
+
+  plt.subplots_adjust(right=0.8)
+  plt.show()
+  
+
+def scatter_spectrum(image, label):
+  """
+  plot the spectrum for each pixels in the image
+  image is numpy array with shape (C, H,W)
+  """
+  c,h,w = image.shape
+  # # assigning coordinates
+  # y = np.linspace(1, w*h, w*h)
+  # x = np.linspace(1, c, c)
+  # X, Y = np.meshgrid(x, y)
+  # # reshape image to fit plot
+  img = image.reshape(c,-1)
+
+  # Change the Size of Graph using Figsize
+  fig = plt.figure(figsize=(6, 5))
+
+  for i in range(w*h):
+    # plt.scatter(range(c),img[:c,i])
+    plt.plot(range(c),img[:c,i], '*')
+  plt.title(f'The biomass is {label}')
+  plt.xlabel('channels')
+  plt.ylabel('intensity')
+  # plt.ylim([0,6000])
+  # plt.xlim([0,11])
+  plt.show()
+
+# class PlotSpectrum:
+#     """ the input image should be NCHW or NCHW
+#   when show image, the image need to be transposef from chw to hwc
+#   imgi = imgi.transpose(1, 2, 0) # from chw to hwc
+
+#   labels is the description of the image
+
+#   imshow_all_3bands
+#   imshow_all_single
+#   imshow_selectBands_3bands
+#   imshow_selectBands_single
+
+#   """
+#   def __init__(self, imgs, labels, max_min_norm):
+#     if isinstance(imgs, torch.Tensor):
+#       imgs = imgs.detach().numpy()
+#     if len(imgs.shape) ==3:
+#       imgs = imgs.reshape((1, ) + imgs.shape)
+#     self.img = imgs
+#     self.labels = labels
+#     self.max_min_norm = max_min_norm
 
 def plot_spatial(img, img_label):
   img_shape = img.shape
