@@ -199,8 +199,8 @@ def train_model(model,  criterion, optimizer, train_loader, validate_loader, num
             running_loss = loss.item()
             if i % 100 == 0:    # print every 2000 mini-batches
                 print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss:.3f}')
-                print(outputs.flatten())
-                print(labels.flatten())
+#                 print(outputs.flatten())
+#                 print(labels.flatten())
                 train_loss += running_loss
                 running_loss = 0.0
 
